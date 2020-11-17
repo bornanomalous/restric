@@ -3,8 +3,8 @@
  */
 
 // Dependencies
-const mongoose = require("mongoose");
 const url = require("url");
+const player = require("../models/player");
 
 // Define handlers
 var handlers = {};
@@ -27,6 +27,12 @@ handlers.country = function (req, res) {
 
     // Get the requested player name
     const country =  queryStringObject.country;
+
+    let doc = mongoose.findOne();
+    console.log(doc);
+
+    res.writeHeader(200);
+    res.end();
 }
 
 // Batsman Handler
@@ -41,6 +47,17 @@ handlers.batsman = function (req, res) {
 
     // Get the requested player name
     const batsman = queryStringObject.batsman;
+
+    player.findOne({
+        NAME: batsman
+    }, function (err, data) {
+        if (err) {
+            res.writeHead(404)
+            res.end()
+        } else {
+            res.json(data);
+        }
+    });
 }
 
 // baller Handler
@@ -55,6 +72,17 @@ handlers.baller = function (req, res) {
 
     // Get the requested player name
     const baller = queryStringObject.baller;
+
+    player.findOne({
+        NAME: baller
+    }, function (err, data) {
+        if (err) {
+            res.writeHead(404)
+            res.end()
+        } else {
+            res.json(data);
+        }
+    });
 }
 
 // Playername Handler
@@ -69,6 +97,20 @@ handlers.team = function (req, res) {
 
     // Get the requested player name
     const team = queryStringObject.team;
+
+    player.find({'Major teams': team}, function(err, data) {
+
+        if (err) {
+            res.writeHead(404)
+            res.end()
+        } else {
+            if (data instanceof object) {
+                res.end(JSON.stringify(data))
+            } else {
+                res.end(data.toString())
+            }
+        }
+    });
 }
 
 // Playername Handler
@@ -82,7 +124,16 @@ handlers.playerName = function (req, res) {
     const queryStringObject = parsedURL.query;
 
     // Get the requested player name
-    const palyerName = queryStringObject.playerName;
+    const playerName = queryStringObject.playerName;
+
+    player.findOne({NAME: playerName}, function(err, data) {
+        if (err) {
+            res.writeHead(404)
+            res.end()
+        } else {
+            res.json(data);
+        }
+    });
 }
 
 // Export thee handler
