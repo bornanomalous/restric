@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server",
+    "server": "npx kill-port 5000 && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,6 +13,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.10.14"
+    "mongoose": "^5.10.14",
+    "nodemon": "^2.0.6"
   }
 }

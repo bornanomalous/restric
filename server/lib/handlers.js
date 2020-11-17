@@ -30,7 +30,6 @@ handlers.country = function (req, res) {
 
   // let doc = mongoose.findOne();
   // console.log(doc);
-  res.send('hello');
 
   player
     .find({ COUNTRY: country }, function (err, data) {
@@ -145,7 +144,7 @@ handlers.playerName = function (req, res) {
       res.writeHead(404);
       res.end();
     } else {
-      res.json(data);
+      res.json([data]);
     }
   });
 };

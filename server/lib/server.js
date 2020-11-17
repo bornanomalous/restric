@@ -61,7 +61,7 @@ server.init = function () {
   server.startApp();
 
   // Connect to the mongo server
-  //   server.connectMongo(config.mongoURL);
+  server.connectMongo(config.mongoURL);
 
   // start the server in the port 3000 !
   server.app.listen(config.httpPort, function () {

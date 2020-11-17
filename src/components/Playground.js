@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
   Box: {
     backgroundColor: '#2d2d2d',
     textAlign: 'left',
-    height: 10,
+    borderRadius: '8px',
+    padding: '10px',
   },
   input: {
     borderColor: '#222',
@@ -41,13 +42,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Playground() {
   const classes = useStyles();
   const [url, setUrl] = useState('');
-  const [data, setData] = useState([]);
+  const [playerData, setplayerData] = useState([]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     console.log(url);
-    axios.get('http://localhost:5000/country?country=India').then((res) => {
-      console.log(res);
+    await axios.get(`http://35.200.58.73:5000/${url}`).then((res) => {
+      console.log(res.data);
+      setplayerData(res.data);
     });
   };
   return (
@@ -72,7 +74,7 @@ export default function Playground() {
             onChange={(e) => setUrl(e.target.value)}
             startAdornment={
               <InputAdornment position='start'>
-                http://localhost:5000
+                http://35.200.58.73:5000
               </InputAdornment>
             }
             labelWidth={80}
@@ -90,7 +92,23 @@ export default function Playground() {
       </Container>
 
       <Container>
-        <Box className={classes.Box}></Box>
+        <Box className={classes.Box}>
+          {playerData ? (
+            playerData.map((player) => {
+              return (
+                <div style={{ marginBottom: '10px' }}>
+                  <pre>
+                    <code style={{ color: '#26c6da' }}>
+                      {JSON.stringify(player, undefined, 2)}
+                    </code>
+                  </pre>
+                </div>
+              );
+            })
+          ) : (
+            <span>hello</span>
+          )}
+        </Box>
       </Container>
     </div>
   );
