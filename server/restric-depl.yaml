@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restric-depl
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: restric
+  template:
+    metadata:
+      labels:
+        app: restric
+        # environment: dev
+    spec:
+      containers:
+        - name: restric
+          image: asia.gcr.io/restric-5000/restric:v1
+          ports:
+            - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restric-srv
+  labels:
+    tier: backend
+spec:
+  type: LoadBalancer
+  selector:
+    app: restric
+  ports:
+    - name: restric
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
