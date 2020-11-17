@@ -4,18 +4,13 @@
 
 //Dependicies
 const express = require("express");
-const http = require("http");
-const https = require("https");
-const fs = require("fs");
-const path = require("path");
 const config = require("./config");
 const handlers = require("./handlers");
 const mongoose = require("mongoose");
 
 // Instantiate the server module object
 const server = {}
-
-server.httpsServer = https.createServer(server.httpsServerOptions, server.app);
+server.models = {}
 
 // Instantiate the express server
 server.startApp = function () {
@@ -23,12 +18,11 @@ server.startApp = function () {
 }
 
 // Connect to the mongoose server
-server.connectMongo = function(url) {
-    mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true}, function(err) {
+server.connectMongo = async function(url) {
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true}, function(err, db) {
         if (err) throw err;
         console.log('\x1b[36m%s\x1b[0m', "Connection with Mongo DB Successfull");
     });
-    server.db = mongoose.connection;
 }
 
 // Router to direct the requests
@@ -41,19 +35,19 @@ server.router = function() {
         handlers.playerName(req, res);
     });
 
-    server.app.get("/country", function(reqm, res) {
-        handlers.country(req, res);
+    server.app.get("/country", function(req, res) {
+        handlers.country(req, res, );
     });
 
-    server.app.get("/batsman", function(reqm, res) {
-        handlers.batsman(req, res);
+    server.app.get("/battingStyle", function (req, res) {
+        handlers.battingStyle(req, res);
     });
 
-    server.app.get("/baller", function(reqm, res) {
-        handlers.ballers(req, res);
+    server.app.get("/bowllingStyle", function (req, res) {
+        handlers.bowllingStyle(req, res);
     });
 
-    server.app.get("/team", function(reqm, res) {
+    server.app.get("/team", function(req, res) {
         handlers.team(req, res);
     });
 }
