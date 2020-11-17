@@ -1,14 +1,15 @@
-import { Button, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import {
   Container,
   Box,
+  Button,
   FormControl,
   OutlinedInput,
   InputAdornment,
   InputLabel,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,14 +32,24 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   buttonSubmit: {
-    backgroundColor: 'blue',
-    margin: '20px',
+    backgroundColor: '#00bcd4',
+    marginTop: '10px',
+    marginLeft: '20px',
   },
 }));
 
 export default function Playground() {
   const classes = useStyles();
   const [url, setUrl] = useState('');
+  const [data, setData] = useState([]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(url);
+    axios.get('http://localhost:5000/country?country=India').then((res) => {
+      console.log(res);
+    });
+  };
   return (
     <div className={classes.root}>
       <Container className={classes.container}>
@@ -61,12 +72,21 @@ export default function Playground() {
             onChange={(e) => setUrl(e.target.value)}
             startAdornment={
               <InputAdornment position='start'>
-                http://localhost:3000
+                http://localhost:5000
               </InputAdornment>
             }
             labelWidth={80}
           />
         </FormControl>
+        <span>
+          <Button
+            className={classes.buttonSubmit}
+            type='submit'
+            onClick={onSubmit}
+          >
+            Execute
+          </Button>
+        </span>
       </Container>
 
       <Container>

@@ -7,8 +7,8 @@ const environments = {};
 
 // Staging (default) environment
 environments.staging = {
-  httpPort: 3000,
-  httpsPort: 3001,
+  httpPort: 5000,
+  httpsPort: 5001,
   mongoURL:
     'mongodb+srv://Shivu:Paganizonda5050@cluster0.f4oem.mongodb.net/Cricket?retryWrites=true&w=majority',
   ENV_NAME: 'Staging',

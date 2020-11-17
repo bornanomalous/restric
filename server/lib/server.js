@@ -28,7 +28,6 @@ server.connectMongo = async function (url) {
     }
   );
 };
-
 // Router to direct the requests
 server.router = function () {
   server.app.get('/ping', function (req, res) {
