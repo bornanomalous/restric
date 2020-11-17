@@ -11,6 +11,7 @@ const PlayerSchema = new Schema({
     'Height': String,
     'Playing role': String,
     'Batting style': String,
+    'Bowling style': String,
     'BATTING_Tests_Mat': String,
     'BATTING_Tests_Ave': String,
     'BATTING_Tests_100': String,

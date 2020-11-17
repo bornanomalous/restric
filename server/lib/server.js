@@ -39,12 +39,12 @@ server.router = function() {
         handlers.country(req, res, );
     });
 
-    server.app.get("/batsman", function(req, res) {
-        handlers.batsman(req, res);
+    server.app.get("/battingStyle", function (req, res) {
+        handlers.battingStyle(req, res);
     });
 
-    server.app.get("/baller", function(req, res) {
-        handlers.ballers(req, res);
+    server.app.get("/bowllingStyle", function (req, res) {
+        handlers.bowllingStyle(req, res);
     });
 
     server.app.get("/team", function(req, res) {
