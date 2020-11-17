@@ -7,10 +7,10 @@ const environments = {};
 
 // Staging (default) environment
 environments.staging = {
-  httpPort: 3002,
+  httpPort: 3000,
   httpsPort: 3001,
   mongoURL:
-    'mongodb+srv://shivu:Paganizonda5050@cluster0.ozpzz.mongodb.net/<dbname>?retryWrites=true&w=majority',
+    'mongodb+srv://Shivu:Paganizonda5050@cluster0.f4oem.mongodb.net/Cricket?retryWrites=true&w=majority',
   ENV_NAME: 'Staging',
 };
 
@@ -19,7 +19,7 @@ environments.production = {
   httpPort: 80,
   httpsPort: 443,
   mongoURL:
-    'mongodb+srv://shivu:Paganizonda5050@cluster0.ozpzz.mongodb.net/<dbname>?retryWrites=true&w=majority',
+    'mongodb+srv://shivu:Paganizonda5050@cluster0.ozpzz.mongodb.net/Cricbase?retryWrites=true&w=majority',
   ENV_NAME: 'Production',
 };
 

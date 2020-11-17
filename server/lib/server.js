@@ -4,31 +4,29 @@
 
 //Dependicies
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const config = require('./config');
 const handlers = require('./handlers');
 const mongoose = require('mongoose');
 
 // Instantiate the server module object
 const server = {};
-
-// server.httpsServer = https.createServer(server.httpsServerOptions, server.app);
-const { MongoClient } = require('mongodb');
+server.models = {};
 
 // Instantiate the express server
-server.startApp = async function () {
+server.startApp = function () {
   server.app = express();
+};
 
-  const client = new MongoClient(
-    'mongodb+srv://shivu:Paganizonda5050@cluster0.ozpzz.mongodb.net/Cricbase?retryWrites=true&w=majority'
+// Connect to the mongoose server
+server.connectMongo = async function (url) {
+  mongoose.connect(
+    url,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, db) {
+      if (err) throw err;
+      console.log('\x1b[36m%s\x1b[0m', 'Connection with Mongo DB Successfull');
+    }
   );
-  await client.connect();
-  const database = await client
-    .db('Cricbase')
-    .collection('Cricket')
-    .stats({}, (res) => console.log(res));
-
 };
 
 // Router to direct the requests
@@ -45,12 +43,12 @@ server.router = function () {
     handlers.country(req, res);
   });
 
-  server.app.get('/batsman', function (req, res) {
-    handlers.batsman(req, res);
+  server.app.get('/battingStyle', function (req, res) {
+    handlers.battingStyle(req, res);
   });
 
-  server.app.get('/baller', function (req, res) {
-    handlers.ballers(req, res);
+  server.app.get('/bowllingStyle', function (req, res) {
+    handlers.bowllingStyle(req, res);
   });
 
   server.app.get('/team', function (req, res) {
