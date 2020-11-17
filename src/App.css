@@ -2,6 +2,18 @@
   text-align: center;
 }
 
-.PrivateTabIndicator-colorSecondary-22 {
+.MuiTabs-indicator {
   background-color: #ef5350 !important;
+}
+
+.codeBox {
+  padding: 0px !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #ef5350 !important;
+}
+
+.MuiFormLabel-root.Mui-focused {
+  color: #ef5350 !important;
 }

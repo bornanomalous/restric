@@ -19,7 +19,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={3} className='codeBox'>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -49,6 +49,29 @@ const useStyles = makeStyles((theme) => ({
   AppBar: {
     backgroundColor: '#fff',
     color: 'inherit',
+  },
+  Box: {
+    backgroundColor: '#2d2d2d',
+    textAlign: 'left',
+    padding: '20px',
+  },
+  function: {
+    color: '#fff',
+  },
+
+  method: {
+    color: '#26c6da',
+    fontWeight: 400,
+  },
+  braces: {
+    color: '#ec407a',
+  },
+  url: {
+    color: '#ffb74d',
+  },
+  res: {
+    color: '#ef5350',
+    fontWeight: 500,
   },
 }));
 
@@ -80,13 +103,64 @@ export default function TabCode() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Box>Javascript</Box>
+        <Box className={classes.Box}>
+          <span>
+            <span className={classes.function}>axios.</span>
+            <span className={classes.method}>get</span>
+            <span className={classes.braces}>(</span>
+            <spans className={classes.url}>"https://localhost"</spans>
+            <span className={classes.braces}>).</span>
+            <br />
+          </span>
+          <span className={classes.method}>&emsp;&emsp;&emsp;then</span>
+          <span className={classes.braces}>(</span>
+          <span className={classes.res}> res</span>
+          <span className={classes.braces}> =&gt; </span>
+          <span className={classes.braces}>&#123;</span>
+          <span style={{ color: '#fff' }}> console.</span>
+          <span className={classes.method}>log</span>
+          <span className={classes.braces}>(</span>
+          <span className={classes.res}> res</span>
+          <span className={classes.braces}> ) ) );</span>
+          <br />
+          <span className={classes.method}>&emsp;&emsp;&emsp;catch</span>
+          <span className={classes.braces}>(</span>
+          <span className={classes.res}> error</span>
+          <span className={classes.braces}> =&gt; </span>
+          <span className={classes.braces}>&#123;</span>
+          <span style={{ color: '#fff' }}> console.</span>
+          <span className={classes.method}>log</span>
+          <span className={classes.braces}>(</span>
+          <span className={classes.res}> error</span>
+          <span className={classes.braces}> ) ) );</span>
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Box>Python</Box>
+        <Box className={classes.Box}>
+          <span className={classes.method}>import</span>
+          <span className={classes.function}> request</span>
+          <br />
+          <span className={classes.function}>response = </span>
+          <span className={classes.function}>requests.</span>
+          <span className={classes.method}>get</span>
+          <span className={classes.braces}>(</span>
+          <spans className={classes.url}> "https://localhost" </spans>
+          <span className={classes.braces}>)</span>
+          <span className={classes.function}> ;</span>
+          <br />
+          <span className={classes.method}>print</span>
+          <span className={classes.braces}>(</span>
+          <span className={classes.function}> response </span>
+          <span className={classes.braces}>)</span>
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Box>Javascript</Box>
+        <Box className={classes.Box}>
+          <span className={classes.method}>curl</span>
+          <span className={classes.url}>
+            &emsp; https://jsonplaceholder.typicode.com/posts
+          </span>
+        </Box>
       </TabPanel>
     </div>
   );
